@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddTransient<IComandaRepository, ComandaRepository>();
 
 builder.Services.AddCors();
 

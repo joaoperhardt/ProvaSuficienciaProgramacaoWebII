@@ -1,9 +1,11 @@
-﻿namespace ProvaSuficiencia.DTO
+﻿using ProvaSuficiencia.Entitys;
+
+namespace ProvaSuficiencia.DTO
 {
     public class ComandaDto
     {
-        public int id { get; set; }
-        public UsuarioComandaDto usuario { get; set; }
-        public List<ProdutoComandaDto> produtos { get; set; }
+        public int UsuarioId { get; set; }
+        public List<int> ProdutoIds { get; set; } = new List<int>();
+
     }
 }
