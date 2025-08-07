@@ -1,5 +1,6 @@
 ﻿using ProvaSuficiencia.DTO;
 using ProvaSuficiencia.Entitys;
+using System.Collections.Generic;
 
 namespace ProvaSuficiencia.Contracts.Repository
 {
@@ -7,7 +8,7 @@ namespace ProvaSuficiencia.Contracts.Repository
     {
         Task<IEnumerable<Comanda>> GetAll();
         Comanda GetById(int id);
-        Comanda Create(ComandaDto comanda);
+        Comanda Add(ComandaDto comanda);
         bool Update(int comandaId, List<int> produtosId);
         string Delete(int id);
     }

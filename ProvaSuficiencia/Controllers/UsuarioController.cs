@@ -17,7 +17,7 @@ namespace ProvaSuficiencia.Controllers
         }
 
         [HttpPost("usuario")]
-        public async Task<IActionResult> Add(UsuarioDto usuarioDto)
+        public async Task<IActionResult> Add([FromBody] UsuarioDto usuarioDto)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace ProvaSuficiencia.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> LogIn(UsuarioLoginDto user)
+        public async Task<IActionResult> LogIn([FromBody] UsuarioLoginDto user)
         {
             try
             {

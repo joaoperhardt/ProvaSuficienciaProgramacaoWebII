@@ -17,9 +17,8 @@ namespace ProvaSuficiencia.Controllers
             _comandaRepository = comandaRepository;
         }
 
-
         [HttpGet("comanda")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             return Ok(await _comandaRepository.GetAll());
         }
@@ -34,9 +33,9 @@ namespace ProvaSuficiencia.Controllers
         }
 
         [HttpPost("comanda")]
-        public IActionResult Create([FromBody] ComandaDto comanda)
+        public IActionResult Add([FromBody] ComandaDto comanda)
         {
-            var comandaCriada = _comandaRepository.Create(comanda);
+            var comandaCriada = _comandaRepository.Add(comanda);
             if (comandaCriada != null)
                 return Ok(comandaCriada);
             return BadRequest("Erro ao criar comanda");

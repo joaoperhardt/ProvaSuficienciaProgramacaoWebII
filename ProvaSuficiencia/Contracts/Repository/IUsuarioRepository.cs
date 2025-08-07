@@ -1,5 +1,7 @@
 ﻿using ProvaSuficiencia.DTO;
 using ProvaSuficiencia.Entitys;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProvaSuficiencia.Contracts.Repository
 {
@@ -8,10 +10,9 @@ namespace ProvaSuficiencia.Contracts.Repository
         Task Add(UsuarioDto usuarioDto);
         Task Update(Usuario usuario);
         Task Delete(int id);
-        Task<IEnumerable<Usuario>> Get();
+        Task<IEnumerable<Usuario>> GetAll();
         Task<IEnumerable<Usuario>> GetByFilter(string filter);
         Task<Usuario> GetById(int id);
         Task<UsuarioTokenDto> LogIn(UsuarioLoginDto user);
-
     }
 }

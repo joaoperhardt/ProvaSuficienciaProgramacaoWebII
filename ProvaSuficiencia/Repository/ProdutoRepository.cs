@@ -22,7 +22,7 @@ namespace ProvaSuficiencia.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Produto>> Get()
+        public Task<IEnumerable<Produto>> GetAll()
         {
             throw new NotImplementedException();
         }

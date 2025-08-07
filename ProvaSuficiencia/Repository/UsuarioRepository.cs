@@ -8,7 +8,6 @@ namespace ProvaSuficiencia.Repository
 {
     public class UsuarioRepository : Connection, IUsuarioRepository
     {
-    
         public async Task Add(UsuarioDto usuarioDto)
         {
             string sql = @"
@@ -24,7 +23,7 @@ namespace ProvaSuficiencia.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Usuario>> Get()
+        public Task<IEnumerable<Usuario>> GetAll()
         {
             throw new NotImplementedException();
         }

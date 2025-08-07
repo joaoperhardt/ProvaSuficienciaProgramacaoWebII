@@ -18,7 +18,7 @@ namespace ProvaSuficiencia.Controllers
         }
 
         [HttpPost("produto")]
-        public async Task<IActionResult> Add(ProdutoDto produtoDto)
+        public async Task<IActionResult> Add([FromBody] ProdutoDto produtoDto)
         {
             try
             {

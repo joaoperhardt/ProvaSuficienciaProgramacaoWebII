@@ -51,7 +51,7 @@ namespace ProvaSuficiencia.Repository
             return comanda;
         }
 
-        public Comanda Create(ComandaDto comanda)
+        public Comanda Add(ComandaDto comanda)
         {
             using var conn = GetConnection();
             var sql = @"INSERT INTO COMANDAS (Usuarios_id) VALUES (@UsuarioId);
@@ -75,8 +75,10 @@ namespace ProvaSuficiencia.Repository
         {
             using var conn = GetConnection();
 
+            // Remove todos os produtos atuais da comanda
             conn.Execute("DELETE FROM COMANDA_PRODUTO WHERE ComandaId = @ComandaId", new { ComandaId = comandaId });
 
+            // Adiciona os novos produtos
             if (produtosId != null && produtosId.Any())
             {
                 foreach (var produtoId in produtosId)

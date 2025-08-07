@@ -1,23 +1,27 @@
-﻿namespace ProvaSuficiencia.Entitys
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProvaSuficiencia.Entitys
 {
     public class Usuario
     {
         public int Id;
+
+        [Required]
+        [StringLength(100)]
         public string Nome { get; set; }
+
+        [Required]
+        [Phone]
         public string Telefone { get; set; }
 
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, MinimumLength = 6)]
         public string Senha { get; set; }
 
-        //public Usuario(string nome, string telefone, string email, string senha)
-        //{
-        //    this.Nome = nome;
-        //    this.Telefone = telefone;
-        //    this.Email = email;
-        //    this.Senha = senha;
-        //}
-
         public string getEmail() { return this.Email; }
-
     }
 }
