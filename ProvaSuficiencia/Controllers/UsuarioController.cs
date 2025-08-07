@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProvaSuficiencia.Contracts.Repository;
 using ProvaSuficiencia.DTO;
 
@@ -15,6 +16,7 @@ namespace ProvaSuficiencia.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+        [Authorize]
         [HttpPost("usuario")]
         public async Task<IActionResult> Add(UsuarioDto usuarioDto)
         {
@@ -29,6 +31,7 @@ namespace ProvaSuficiencia.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("usuario/{id}")]
         public async Task<IActionResult> GetById(int id)
         {

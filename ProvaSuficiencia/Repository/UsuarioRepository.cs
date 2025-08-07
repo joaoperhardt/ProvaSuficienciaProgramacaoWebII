@@ -47,7 +47,7 @@ namespace ProvaSuficiencia.Repository
 
         public async Task<UsuarioTokenDto> LogIn(UsuarioLoginDto user)
         {
-            string sql = "SELECT * FROM USUARIOS WHERE Email = @Email AND Senha = @Password";
+            string sql = "SELECT * FROM USUARIOS WHERE Email = @Email AND Senha = @Senha";
             Usuario userLogin = await GetConnection().QueryFirstAsync<Usuario>(sql, user);
             return new UsuarioTokenDto
             {

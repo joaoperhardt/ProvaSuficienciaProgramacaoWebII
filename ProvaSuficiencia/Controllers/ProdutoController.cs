@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProvaSuficiencia.Contracts.Repository;
 using ProvaSuficiencia.DTO;
 
 namespace ProvaSuficiencia.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("RestAPIFurb")]
     public class ProdutoController : ControllerBase
