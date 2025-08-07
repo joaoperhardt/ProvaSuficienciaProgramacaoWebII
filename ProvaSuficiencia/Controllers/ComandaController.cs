@@ -36,9 +36,9 @@ namespace ProvaSuficiencia.Controllers
         [HttpPost("comanda")]
         public IActionResult Create([FromBody] ComandaDto comanda)
         {
-            var id = _comandaRepository.Create(comanda);
-            if (id > 0)
-                return Ok(new { id });
+            var comandaCriada = _comandaRepository.Create(comanda);
+            if (comandaCriada != null)
+                return Ok(comandaCriada);
             return BadRequest("Erro ao criar comanda");
         }
 
@@ -54,10 +54,10 @@ namespace ProvaSuficiencia.Controllers
         [HttpDelete("comanda/{id}")]
         public IActionResult Delete(int id)
         {
-            var result = _comandaRepository.Delete(id);
-            if (result)
-                return Ok();
-            return BadRequest("Erro ao deletar comanda");
+            var mensagem = _comandaRepository.Delete(id);
+            if (mensagem.StartsWith("Comanda deletada"))
+                return Ok(new { mensagem });
+            return NotFound(new { mensagem });
         }
     }
 }

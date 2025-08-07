@@ -51,7 +51,7 @@ namespace ProvaSuficiencia.Repository
             return comanda;
         }
 
-        public int Create(ComandaDto comanda)
+        public Comanda Create(ComandaDto comanda)
         {
             using var conn = GetConnection();
             var sql = @"INSERT INTO COMANDAS (Usuarios_id) VALUES (@UsuarioId);
@@ -68,17 +68,15 @@ namespace ProvaSuficiencia.Repository
                 }
             }
 
-            return comandaId;
+            return GetById(comandaId);
         }
 
         public bool Update(int comandaId, List<int> produtosId)
         {
             using var conn = GetConnection();
 
-            // Remove todos os produtos atuais da comanda
             conn.Execute("DELETE FROM COMANDA_PRODUTO WHERE ComandaId = @ComandaId", new { ComandaId = comandaId });
 
-            // Adiciona os novos produtos
             if (produtosId != null && produtosId.Any())
             {
                 foreach (var produtoId in produtosId)
@@ -92,12 +90,12 @@ namespace ProvaSuficiencia.Repository
             return true;
         }
 
-        public bool Delete(int id)
+        public string Delete(int id)
         {
             using var conn = GetConnection();
             conn.Execute("DELETE FROM COMANDA_PRODUTO WHERE ComandaId = @ComandaId", new { ComandaId = id });
             var affected = conn.Execute("DELETE FROM COMANDAS WHERE Id = @Id", new { Id = id });
-            return affected > 0;
+            return affected > 0 ? "Comanda deletada com sucesso." : "Comanda não encontrada ou já removida.";
         }
     }
 }

@@ -16,7 +16,6 @@ namespace ProvaSuficiencia.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
-        [Authorize]
         [HttpPost("usuario")]
         public async Task<IActionResult> Add(UsuarioDto usuarioDto)
         {

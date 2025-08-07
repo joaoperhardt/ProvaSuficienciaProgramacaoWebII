@@ -1,4 +1,6 @@
-﻿namespace ProvaSuficiencia.DTO
+﻿using ProvaSuficiencia.Helper;
+
+namespace ProvaSuficiencia.DTO
 {
     public class UsuarioDto
     {
@@ -6,5 +8,10 @@
         public string telefone { get; set; }
         public string email { get; set; }
         public string senha { get; set; }
+
+        public void SetSenhaHash()
+        {
+            this.senha = senha.GenerateHash();
+        }
     }
 }

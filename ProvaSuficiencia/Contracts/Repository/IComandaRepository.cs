@@ -7,8 +7,8 @@ namespace ProvaSuficiencia.Contracts.Repository
     {
         Task<IEnumerable<Comanda>> GetAll();
         Comanda GetById(int id);
-        int Create(ComandaDto comanda);
+        Comanda Create(ComandaDto comanda);
         bool Update(int comandaId, List<int> produtosId);
-        bool Delete(int id);
+        string Delete(int id);
     }
 }

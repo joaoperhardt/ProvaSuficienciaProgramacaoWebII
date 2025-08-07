@@ -15,7 +15,7 @@ namespace ProvaSuficiencia.Repository
                 INSERT INTO USUARIOS (Nome, Telefone, Email, Senha)
                             VALUE (@nome, @telefone, @email, @senha)
             ";
-
+            usuarioDto.SetSenhaHash();
             await Execute(sql, usuarioDto);
         }
 
@@ -48,6 +48,7 @@ namespace ProvaSuficiencia.Repository
         public async Task<UsuarioTokenDto> LogIn(UsuarioLoginDto user)
         {
             string sql = "SELECT * FROM USUARIOS WHERE Email = @Email AND Senha = @Senha";
+            user.ValidSenhaHash();
             Usuario userLogin = await GetConnection().QueryFirstAsync<Usuario>(sql, user);
             return new UsuarioTokenDto
             {
