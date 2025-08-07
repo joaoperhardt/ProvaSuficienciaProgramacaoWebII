@@ -2,6 +2,7 @@
 using ProvaSuficiencia.DTO;
 using ProvaSuficiencia.Entitys;
 using ProvaSuficiencia.Infrastructure;
+using Dapper;
 
 namespace ProvaSuficiencia.Repository
 {
@@ -13,33 +14,41 @@ namespace ProvaSuficiencia.Repository
                 INSERT INTO PRODUTOS (Nome, Preco)
                             VALUE (@nome, @preco)
             ";
-
             await Execute(sql, produtoDto);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            await conn.ExecuteAsync("DELETE FROM PRODUTOS WHERE Id = @id", new { id });
         }
 
-        public Task<IEnumerable<Produto>> GetAll()
+        public async Task<IEnumerable<Produto>> GetAll()
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            return await conn.QueryAsync<Produto>("SELECT * FROM PRODUTOS");
         }
 
-        public Task<IEnumerable<Produto>> GetByFilter(string filter)
+        public async Task<IEnumerable<Produto>> GetByFilter(string filter)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            return await conn.QueryAsync<Produto>(
+                "SELECT * FROM PRODUTOS WHERE Nome LIKE @filtro",
+                new { filtro = "%" + filter + "%" });
         }
 
-        public Task<Produto> GetById(int id)
+        public async Task<Produto> GetById(int id)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            return await conn.QueryFirstOrDefaultAsync<Produto>("SELECT * FROM PRODUTOS WHERE Id = @id", new { id });
         }
 
-        public Task Update(Produto produto)
+        public async Task Update(Produto produto)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            await conn.ExecuteAsync(
+                "UPDATE PRODUTOS SET Nome = @Nome, Preco = @Preco WHERE Id = @Id",
+                produto);
         }
     }
 }

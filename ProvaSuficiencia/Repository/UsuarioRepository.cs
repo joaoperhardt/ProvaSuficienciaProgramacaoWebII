@@ -18,30 +18,38 @@ namespace ProvaSuficiencia.Repository
             await Execute(sql, usuarioDto);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            await conn.ExecuteAsync("DELETE FROM USUARIOS WHERE Id = @id", new { id });
         }
 
-        public Task<IEnumerable<Usuario>> GetAll()
+        public async Task<IEnumerable<Usuario>> GetAll()
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            return await conn.QueryAsync<Usuario>("SELECT * FROM USUARIOS");
         }
 
-        public Task<IEnumerable<Usuario>> GetByFilter(string filter)
+        public async Task<IEnumerable<Usuario>> GetByFilter(string filter)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            return await conn.QueryAsync<Usuario>(
+                "SELECT * FROM USUARIOS WHERE Nome LIKE @filtro OR Email LIKE @filtro",
+                new { filtro = "%" + filter + "%" });
         }
 
         public async Task<Usuario> GetById(int id)
         {
             string sql = "SELECT * FROM USUARIOS WHERE Id = @id";
-            return await GetConnection().QueryFirstAsync<Usuario>(sql, new { id });
+            return await GetConnection().QueryFirstOrDefaultAsync<Usuario>(sql, new { id });
         }
 
-        public Task Update(Usuario usuario)
+        public async Task Update(Usuario usuario)
         {
-            throw new NotImplementedException();
+            using var conn = GetConnection();
+            await conn.ExecuteAsync(
+                "UPDATE USUARIOS SET Nome = @Nome, Telefone = @Telefone, Email = @Email WHERE Id = @Id",
+                usuario);
         }
 
         public async Task<UsuarioTokenDto> LogIn(UsuarioLoginDto user)
